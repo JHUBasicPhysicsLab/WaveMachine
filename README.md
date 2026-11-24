@@ -10,6 +10,18 @@ Open `web/index.html` in any browser, or copy the `web/` folder to a web server.
 energy plot. Students don't see it, since it gives away answers to the handout's Problems 3 and 4.
 It's hidden, not protected.
 
+## Published copy
+
+Live at <https://lecdemo.johnshopkins.edu/Labs/WaveMachine/> (instructor notes:
+`.../Labs/WaveMachine/instructor.html`). The files are a copy of `web/` in `public_html/Labs/WaveMachine/`
+on the WebDAV share (`/Volumes/public_html` when mounted). To update, copy `web/` there again:
+
+```bash
+COPYFILE_DISABLE=1 rsync -rt --exclude '.DS_Store' --exclude '._*' web/ /Volumes/public_html/Labs/WaveMachine/
+```
+
+To take it down, delete the `Labs/WaveMachine` folder. Nothing else on the site uses it.
+
 ## Credits
 
 - **Original simulation and teaching material:** Prof. Oleg Tchernyshyov, Department of Physics and
