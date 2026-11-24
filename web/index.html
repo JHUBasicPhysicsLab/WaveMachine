@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virtual Wave Machine</title>
+<meta name="description" content="Interactive simulation of a torsional wave machine: forbidden frequency bands, standing waves and resonances.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Virtual Wave Machine</h1>
+  <p class="subtitle">A simulation of the torsional wave machine, after the original applet by Oleg Tchernyshyov, Johns Hopkins University</p>
+</header>
+
+<main>
+  <section class="sim" aria-label="Simulation">
+    <div class="card">
+      <div class="card-head">
+        <h2 id="machine-title">Wave machine</h2>
+        <div class="seg" role="group" aria-label="View">
+          <button type="button" id="view3d" aria-pressed="true">3D view</button>
+          <button type="button" id="view2d" aria-pressed="false">Angles</button>
+        </div>
+      </div>
+      <canvas id="machine" aria-labelledby="machine-title" role="img"></canvas>
+      <p class="hint" id="machine-hint">Drag to turn the view. The red rod is driven. Click the last rod to clamp or free that end.</p>
+
+      <div class="buttons">
+        <button type="button" class="btn primary" id="play">Pause</button>
+        <button type="button" class="btn" id="reset">Reset</button>
+        <button type="button" class="btn" id="kick">Twist first rod</button>
+      </div>
+      <div class="readouts" aria-live="off">
+        <span>t = <b id="r-t">0</b> s</span>
+        <span>ω = <b id="r-w">0.200</b> rad/s</span>
+        <span>energy = <b id="r-e">0</b></span>
+        <span>right end: <b id="r-end">free</b></span>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <label for="freq-range"><span>Drive frequency ω (rad/s)</span></label>
+          <div class="row">
+            <input type="range" id="freq-range" min="0" max="2.5" step="0.001">
+            <input type="number" id="freq-num" min="0" max="2.5" step="0.001" aria-label="Drive frequency">
+          </div>
+        </div>
+        <div class="control">
+          <label for="sweep-range"><span>Sweep rate dω/dt (rad/s²)</span></label>
+          <div class="row">
+            <input type="range" id="sweep-range" min="-0.002" max="0.002" step="0.00005">
+            <input type="number" id="sweep-num" min="-0.01" max="0.01" step="0.0001" aria-label="Sweep rate">
+          </div>
+        </div>
+        <div class="control">
+          <label for="ampl-range"><span>Drive torque τ₀</span></label>
+          <div class="row">
+            <input type="range" id="ampl-range" min="0" max="0.5" step="0.005">
+            <input type="number" id="ampl-num" min="0" max="2" step="0.005" aria-label="Drive torque">
+          </div>
+        </div>
+        <div class="control">
+          <label for="damp-range"><span>Damping b</span></label>
+          <div class="row">
+            <input type="range" id="damp-range" min="0" max="0.2" step="0.001">
+            <input type="number" id="damp-num" min="0" max="1" step="0.001" aria-label="Damping">
+          </div>
+        </div>
+        <div class="control">
+          <label for="speed-range"><span>Simulation speed (× real time)</span></label>
+          <div class="row">
+            <input type="range" id="speed-range" min="1" max="60" step="1">
+            <input type="number" id="speed-num" min="1" max="200" step="1" aria-label="Simulation speed">
+          </div>
+        </div>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="clamp"> Clamp the right end</label>
+        <label><input type="checkbox" id="drive-on" checked> Drive on</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2 id="plot-title">Energy vs. drive frequency</h2>
+        <button type="button" class="btn" id="clear-plot">Clear plot</button>
+      </div>
+      <canvas id="plot" aria-labelledby="plot-title" role="img"></canvas>
+      <div class="legend">
+        <span style="--c: var(--up)">sweeping up</span>
+        <span style="--c: var(--down)">sweeping down</span>
+        <span style="--c: var(--drive)">now</span>
+      </div>
+      <p class="hint" id="plot-readout">Click the plot to read off a frequency and energy.</p>
+      <div class="checks">
+        <label><input type="checkbox" id="logy"> Log energy scale</label>
+        <label><input type="checkbox" id="theory"> Show predicted resonances</label>
+      </div>
+    </div>
+  </section>
+
+  <article class="prose">
+    <h2>About the wave machine</h2>
+    <figure>
+      <img src="assets/wave-machine-photo.jpg" alt="A long torsional wave machine: many thin horizontal rods mounted on a wire running along a wooden base" width="400" height="90">
+      <figcaption>A torsional wave machine of the kind invented by John N. Shive at Bell Laboratories.</figcaption>
+    </figure>
+    <p>Here we simulate the dynamics of the torsional wave machine pictured above. It consists of a set
+    of horizontal rods connected to one another by a wire. As the rods oscillate in a vertical plane,
+    <i>transverse waves</i> propagate through the device. The torsional wave machine illustrates several
+    important physical concepts.</p>
+
+    <h3>Forbidden frequency band</h3>
+    <p>You might expect that waves travel freely from one end of the machine to the other. It turns out
+    that this expectation works for some waves but not for others. Waves with low frequencies cannot
+    travel through it. If you rock one end of the wave machine periodically and slowly, the other end
+    will remain stationary. The phenomenon of forbidden frequency bands exists in many other physical
+    systems. Electromagnetic waves (e.g. visible light) cannot propagate in metals. The ionosphere
+    reflects back low-frequency radio waves. Our wave machine lets you examine how far a low-frequency
+    wave can propagate into the system before it is “turned back.”</p>
+
+    <h3>Standing waves</h3>
+    <p>Waves with sufficiently high frequencies are able to propagate through the machine. In this case
+    we have a further complication: our system is finite and waves are reflected back at the edges.
+    The reflections interfere with the original wave and may enhance or suppress the net amplitude.
+    The highest amplitude is reached when the original wave and its reflections are matched at their
+    crests and troughs. In such cases each reflection enhances the net amplitude of the wave and we
+    find a <i>resonance</i>. Since it is hard to keep track of multiple reflections, it is more
+    convenient to think of standing (rather than running) waves. A resonance corresponds to a standing
+    wave that “fits” in a particular way between the edges. You can observe resonances visually. For
+    a more accurate measurement, the second panel shows the energy of the waves as a function of the
+    frequency of the external force.</p>
+
+    <h2>The model</h2>
+    <p>The simulation has 12 rods. Rod <i>n</i> is turned by an angle θ<sub><i>n</i></sub> and obeys</p>
+    <p style="text-align:center">θ̈<sub><i>n</i></sub> = s²(θ<sub><i>n</i>+1</sub> − 2θ<sub><i>n</i></sub> + θ<sub><i>n</i>−1</sub>) − ω₀²θ<sub><i>n</i></sub> − bθ̇<sub><i>n</i></sub></p>
+    <p>The first term is the twist of the wire between neighboring rods. The second is gravity: the wire
+    holds each rod above its center of mass, so a turned rod is pulled back toward horizontal. The third
+    is friction. Here s² = 1 and ω₀ = 0.5 rad/s, so waves with ω &lt; 0.5 rad/s are in the forbidden band.
+    The first rod (red) also feels an external torque τ₀ cos ω<i>t</i>. The drive frequency ω changes
+    slowly at the sweep rate, so the energy plot traces out the response of the machine across a range
+    of frequencies.</p>
+
+    <h2>How to use it</h2>
+    <ul>
+      <li>Set the drive frequency and sweep rate with the sliders, or type a value and press Enter.
+      It can help to pause while you do this. A negative sweep rate sweeps downward; zero holds the
+      frequency fixed.</li>
+      <li>Watch for peaks in the energy plot. These are the resonances. Click on the plot to read off
+      the frequency and energy at any point.</li>
+      <li>A fast sweep broadens the peaks, and the first two resonances are close together, so slow the
+      sweep down to separate them. It takes time to build up a resonance, so the peaks lag behind the
+      drive. Sweep in both directions: the true resonance lies between the peak positions.</li>
+      <li>Clamp the right end with the checkbox, or by clicking the last rod, to compare a free end with
+      a fixed one.</li>
+      <li>“Show predicted resonances” marks the normal-mode frequencies of the 12-rod model and shades the
+      forbidden band. Try to measure them yourself before turning it on.</li>
+    </ul>
+
+    <h2>The handout</h2>
+    <p>For the physics of the wave machine and suggested activities, see Oleg Tchernyshyov’s handout,
+    <a href="assets/Waves1d.pdf"><i>Elastic waves in one dimension</i> (PDF)</a>. It covers the dispersion
+    relation, the penetration length of forbidden waves, boundary conditions and standing waves, and
+    includes problems that use this simulation. (The handout refers to the original Java applet; this
+    page has the same model, parameters, and controls.)</p>
+
+    <h2>Credits</h2>
+    <p>The original <i>Virtual Wave Machine</i> applet, its physics model and text, and the handout are the
+    work of Prof. <a href="https://physics-astronomy.jhu.edu/">Oleg Tchernyshyov</a>, Department of
+    Physics and Astronomy, Johns Hopkins University. The applet was created with the aid of
+    <i>Easy Java Simulations</i> by Francisco Esquembre (Universidad de Murcia), built on the Open
+    Source Physics tools by Wolfgang Christian (Davidson College).</p>
+    <figure>
+      <img src="assets/original-applet.jpg" alt="Screenshot of the original Java applet, showing the 3D wave machine and an energy versus frequency plot" width="218" height="79">
+      <figcaption>The original Java applet.</figcaption>
+    </figure>
+    <p>This browser version was written in 2026 by the JHU Basic Physics Lab, because Java applets no longer
+    run in web browsers. It reproduces the original model in plain JavaScript.</p>
+
+    <div class="ack">
+      <p>The original work was supported by the National Science Foundation under Grant No. DMR-0348679.
+      Any opinions, findings, and conclusions or recommendations expressed in this material are those of
+      the author and do not necessarily reflect the views of the National Science Foundation.</p>
+    </div>
+  </article>
+</main>
+<footer></footer>
+<script src="wavemachine.js"></script>
+</body>
+</html>
