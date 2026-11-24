@@ -1,0 +1,820 @@
+<Osejs version="3.4">
+<Osejs.Description>
+<Osejs.Description.Page>
+<Type>HTML_EDITOR</Type>
+<Name>Introduction</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<![CDATA[
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <h1>
+      Torsional Wave Machine
+    </h1>
+    <img align="middle" src="_users/johns_hopkins/olegt/images/W-b1b.jpg">
+    <br>
+    
+
+    <p>
+      Here we will simulate the dynamics of a torsional wave machine pictured 
+      above. It consists of a set of horizontal rods connected to one another 
+      by a wire. As the rods oscillate in a vertical plane, <i>transverse waves</i> 
+      propagate through the device.<br>
+    </p>
+    <p>
+      <img src="_users/johns_hopkins/olegt/images//wavemachine.jpg" style="height: 79px; width: 218px" title="torsional wave machine" alt="torsional wave machine">
+      <br>
+      
+    </p>
+    The torsional wave machine illustrates several important physical 
+    concepts.&#160;<br><br><i><b><span>Forbidden frequency band.</span></b></i>&#160; 
+    You might expect that waves travel freely from one end of the machine to 
+    the other.&#160; It turns out that this expectation works for some waves but 
+    not for others.&#160; Waves with low frequencies cannot travel through it.&#160; If 
+    you rock one end of the wave machine periodically and slowly, the other 
+    end will remain stationary.&#160; The phenomenon of forbidden frequency bands 
+    exist in many other physical systems.&#160; Electromagnetic waves (e.g. visible 
+    light) cannot propagate in metals.&#160; The ionosphere reflects back 
+    low-frequency radiowaves.&#160; Our wave machine lets you examine how far a 
+    low-frequency wave can propagate into the system before it is &quot;turned 
+    back.&quot;&#160;<br><br><i><b><span>Standing waves.</span></b></i>&#160; Waves 
+    with sufficiently high frequencies are able propagate through the 
+    machine.&#160; In this case we have a further complication: our system is 
+    finite and waves are reflected back at the edges.&#160; The reflections 
+    interfere with the original wave and may enhance or suppress the net 
+    amplitude.&#160; The highest amplitude is reached when the original wave and 
+    its reflections are matched at their crests and troughs.&#160; In such cases 
+    each reflection enhances the net amplitude of the wave and we find a <i><span>resonance</span></i>.&#160; 
+    Since it is hard to keep track of multiple reflections, it is more 
+    convenient to think of standing (rather than running) waves.&#160; A resonance 
+    corresponds to a standing wave that &quot;fits&quot; in a particular way between the 
+    edges.&#160; You can observe resonances visually.&#160; For a more accurate 
+    measurement, a second window shows the energy of the waves as a function 
+    of the frequency of the extetrnal force.&#160;<br>
+
+    <p>
+      For more details about the applet, the physics of the wave machine, and 
+      suggested activities please refer to <a href="http://www.pha.jhu.edu/~javalab/wavemachine/Waves1d.pdf">this 
+      PDF file</a>.<br>
+    </p>
+    <p>
+      The applet was created with the aid of <a href="http://www.um.es/fem/Ejs/">Easy 
+      Java Simulations</a>.<br>
+    </p>
+    <hr style="height: 2px; width: 100%">
+    
+
+    <table border="0" width="100%">
+      <tr>
+        <td width="67">
+          <img src="_users/johns_hopkins/olegt/images//nsf4c.jpg" width="67" alt="Ejs">
+          
+        </td>
+        <td width="*">
+          <div align="left">
+            This material is based upon work supported by the National Science 
+            Foundation under Grant No. DMR-0348679.<br><br>Any opinions, 
+            findings, and conclusions or recommendations expressed in this 
+            material are those of the author and do not necessarily reflect 
+            the views of the National Science Foundation.&#160;
+          </div>
+        </td>
+      </tr>
+    </table>
+    <hr style="height: 2px; width: 100%">
+    
+
+    <p>
+      About the author: <a href="http://www.pha.jhu.edu/~olegt">Oleg 
+      Tchernyshyov</a> is an Assistant Professor in the <a href="http://physics-astronomy.jhu.edu/">Department 
+      of Physics and Astronomy</a> at the Johns Hopkins University.&#160;<br>
+    </p>
+  </body>
+</html>
+
+]]>
+
+</Content>
+</Osejs.Description.Page>
+</Osejs.Description>
+<Osejs.Model>
+<Osejs.Model.FramesPerSecond>24</Osejs.Model.FramesPerSecond>
+<Osejs.Model.Autostart>true</Osejs.Model.Autostart>
+<Osejs.Model.AdditionalLibraries>
+</Osejs.Model.AdditionalLibraries>
+<Osejs.Model.ImportStatements>
+</Osejs.Model.ImportStatements>
+<Osejs.Model.Variables>
+<Osejs.Model.Variables.Page>
+<Type>VARIABLE_EDITOR</Type>
+<Name>CoordinatesVelocities</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<Variable>
+<Name>t</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>n</Name>
+<Value><![CDATA[12]]></Value>
+<Type>int</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>x</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension>[n]</Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>v</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension>[n]</Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>k</Name>
+<Value><![CDATA[1.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>k0</Name>
+<Value><![CDATA[0.25]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>b</Name>
+<Value><![CDATA[0.025]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>phi</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>freq</Name>
+<Value><![CDATA[0.2]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>ampl</Name>
+<Value><![CDATA[0.125]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>sweeprate1</Name>
+<Value><![CDATA[0.0005]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>PotentialEnergy</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>KineticEnergy</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>TotalEnergy</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>DissipationRate</Name>
+<Value><![CDATA[0.0]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>RightEndClamped</Name>
+<Value><![CDATA[false]]></Value>
+<Type>boolean</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>d</Name>
+<Value><![CDATA[0.75]]></Value>
+<Type>double</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name>ThreeD</Name>
+<Value><![CDATA[true]]></Value>
+<Type>boolean</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+<Variable>
+<Name></Name>
+<Value><![CDATA[]]></Value>
+<Type>boolean</Type>
+<Dimension></Dimension>
+<Comment><![CDATA[]]></Comment>
+</Variable>
+
+</Content>
+</Osejs.Model.Variables.Page>
+</Osejs.Model.Variables>
+<Osejs.Model.Initialization>
+<Osejs.Model.Initialization.Page>
+<Type>CODE_EDITOR</Type>
+<Name>Init Page</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<Comment><![CDATA[]]></Comment>
+<Code><![CDATA[
+for (int counter=0; counter<n; counter++) {
+  x[counter]=0.0;
+}
+for (int counter=0; counter<n; counter++) {
+  v[counter]=0.0;
+}
+
+//_setFPS(100);
+_setDelay(0);
+
+]]></Code>
+
+</Content>
+</Osejs.Model.Initialization.Page>
+</Osejs.Model.Initialization>
+<Osejs.Model.Evolution>
+<Osejs.Model.Evolution.Page>
+<Type>ODE_EDITOR</Type>
+<Name>EvolutionPage</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<IndependentVariable>t</IndependentVariable>
+<Increment>0.1</Increment>
+<Rate state="x[i]">v[i]</Rate>
+<Rate state="v[i]">f(i,x,v)</Rate>
+<Rate state="phi">freq</Rate>
+<Rate state="freq">sweeprate1</Rate>
+<Method>RungeKuttaFehlberg</Method>
+<Tolerance>0.001</Tolerance>
+<Comment><![CDATA[]]></Comment>
+
+</Content>
+</Osejs.Model.Evolution.Page>
+</Osejs.Model.Evolution>
+<Osejs.Model.Constraints>
+<Osejs.Model.Constraints.Page>
+<Type>CODE_EDITOR</Type>
+<Name>Constraints</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<Comment><![CDATA[]]></Comment>
+<Code><![CDATA[
+KineticEnergy=0;
+for (int i=0; i<n ; i++) {
+  KineticEnergy+=v[i]*v[i]/2;
+}
+
+PotentialEnergy=0;
+for (int i=0; i<n ; i++) {
+  PotentialEnergy+=k0*x[i]*x[i]/2;
+  if (i>0) PotentialEnergy+=k*(x[i]-x[i-1])*(x[i]-x[i-1])/2;
+}
+
+TotalEnergy = PotentialEnergy+KineticEnergy;
+
+DissipationRate=0;
+for (int i=0; i<n ; i++) {
+  DissipationRate+=b*v[i]*v[i];
+}
+
+if (RightEndClamped) {
+  x[n-1]=0;
+  v[n-1]=0;
+}
+]]></Code>
+
+</Content>
+</Osejs.Model.Constraints.Page>
+</Osejs.Model.Constraints>
+<Osejs.Model.Library>
+<Osejs.Model.Library.Page>
+<Type>LIBRARY_EDITOR</Type>
+<Name>Forces</Name>
+<Active>true</Active>
+<Visible>true</Visible>
+<Content>
+<Comment><![CDATA[]]></Comment>
+<Code><![CDATA[
+public double f(int i, double x[], double v[]) {
+	double force = -k0*x[i] -b*v[i];
+	if (i>0) force += k*(x[i-1]-x[i]);
+	if (i<n-1) force += k*(x[i+1]-x[i]);
+	if (i==0) force += ampl*Math.cos(phi);
+	return force;
+}
+
+public void ToggleClamping() {
+	RightEndClamped = !RightEndClamped;
+}
+]]></Code>
+
+</Content>
+</Osejs.Model.Library.Page>
+</Osejs.Model.Library>
+</Osejs.Model>
+<Osejs.View>
+<Osejs.View.Creation>
+<Osejs.View.Creation.Element>
+<Expanded>true</Expanded>
+<Type>Elements.Frame</Type>
+<Property name="name">Frame</Property>
+<Property name="_ejs_mainWindow">true</Property>
+<Property name="title"><![CDATA[Frame]]></Property>
+<Property name="layout"><![CDATA[border]]></Property>
+<Property name="visible"><![CDATA[true]]></Property>
+<Property name="location"><![CDATA["125,198"]]></Property>
+<Property name="size"><![CDATA["486,325"]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Expanded>false</Expanded>
+<Type>Elements.DrawingPanel</Type>
+<Property name="name">DrawingPanel</Property>
+<Property name="parent">Frame</Property>
+<Property name="position">center</Property>
+<Property name="autoscaleX"><![CDATA[false]]></Property>
+<Property name="autoscaleY"><![CDATA[false]]></Property>
+<Property name="minimumX"><![CDATA[-d]]></Property>
+<Property name="maximumX"><![CDATA[n*d]]></Property>
+<Property name="minimumY"><![CDATA[-2*ampl]]></Property>
+<Property name="maximumY"><![CDATA[2*ampl]]></Property>
+<Property name="x"><![CDATA[time]]></Property>
+<Property name="y"><![CDATA[X]]></Property>
+<Property name="square"><![CDATA[true]]></Property>
+<Property name="gutters"><![CDATA[0,0,0,0]]></Property>
+<Property name="showCoordinates"><![CDATA[true]]></Property>
+<Property name="visible"><![CDATA[!ThreeD]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod0</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[0.0]]></Property>
+<Property name="y"><![CDATA[x[0]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="color"><![CDATA[red]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod1</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*1.0]]></Property>
+<Property name="y"><![CDATA[x[1]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod2</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*2.0]]></Property>
+<Property name="y"><![CDATA[x[2]]]></Property>
+<Property name="z"><![CDATA[0.0]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod3</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*3.0]]></Property>
+<Property name="y"><![CDATA[x[3]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod4</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*4.0]]></Property>
+<Property name="y"><![CDATA[x[4]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod5</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*5.0]]></Property>
+<Property name="y"><![CDATA[x[5]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod6</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*6.0]]></Property>
+<Property name="y"><![CDATA[x[6]]]></Property>
+<Property name="z"><![CDATA[0.0]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod7</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*7.0]]></Property>
+<Property name="y"><![CDATA[x[7]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod8</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*8.0]]></Property>
+<Property name="y"><![CDATA[x[8]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod9</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*9.0]]></Property>
+<Property name="y"><![CDATA[x[9]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod10</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*10.0]]></Property>
+<Property name="y"><![CDATA[x[10]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Particle</Type>
+<Property name="name">Rod11</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[d*11.0]]></Property>
+<Property name="y"><![CDATA[x[11]]]></Property>
+<Property name="sizex"><![CDATA[0.2]]></Property>
+<Property name="sizey"><![CDATA[0.2]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="pressaction"><![CDATA[ToggleClamping()]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">HorizontalAxis</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[-0.5]]></Property>
+<Property name="y"><![CDATA[0]]></Property>
+<Property name="sizex"><![CDATA[n]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="visible"><![CDATA[true]]></Property>
+<Property name="enabled"><![CDATA[false]]></Property>
+<Property name="enabledSecondary"><![CDATA[false]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">VerticalAxis</Property>
+<Property name="parent">DrawingPanel</Property>
+<Property name="x"><![CDATA[0.5*(n-1)]]></Property>
+<Property name="y"><![CDATA[-5.0]]></Property>
+<Property name="sizex"><![CDATA[0.0]]></Property>
+<Property name="sizey"><![CDATA[10.0]]></Property>
+<Property name="visible"><![CDATA[true]]></Property>
+<Property name="enabled"><![CDATA[false]]></Property>
+<Property name="enabledSecondary"><![CDATA[false]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Field</Type>
+<Property name="name">AmplField</Property>
+<Property name="parent">Frame</Property>
+<Property name="position">north</Property>
+<Property name="variable"><![CDATA[sweeprate1]]></Property>
+<Property name="format"><![CDATA[sweeprate = 0.0000]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Field</Type>
+<Property name="name">FreqField</Property>
+<Property name="parent">Frame</Property>
+<Property name="position">south</Property>
+<Property name="variable"><![CDATA[freq]]></Property>
+<Property name="format"><![CDATA[freq = 0.000]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.RadioButton</Type>
+<Property name="name">TwoD_ThreeD</Property>
+<Property name="parent">Frame</Property>
+<Property name="position">west</Property>
+<Property name="variable"><![CDATA[ThreeD]]></Property>
+<Property name="selected"><![CDATA[true]]></Property>
+<Property name="text"><![CDATA[3D view]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Expanded>false</Expanded>
+<Type>Elements.DrawingPanel3D</Type>
+<Property name="name">DrawingPanel3D</Property>
+<Property name="parent">Frame</Property>
+<Property name="position">east</Property>
+<Property name="minimumX"><![CDATA[-2.0]]></Property>
+<Property name="maximumX"><![CDATA[2.0]]></Property>
+<Property name="minimumY"><![CDATA[-d]]></Property>
+<Property name="maximumY"><![CDATA[n*d]]></Property>
+<Property name="minimumZ"><![CDATA[-2.0]]></Property>
+<Property name="maximumZ"><![CDATA[2.0]]></Property>
+<Property name="displayMode"><![CDATA[PERSPECTIVE]]></Property>
+<Property name="square"><![CDATA[true]]></Property>
+<Property name="alpha"><![CDATA[30]]></Property>
+<Property name="beta"><![CDATA[30]]></Property>
+<Property name="zoom"><![CDATA[1.5]]></Property>
+<Property name="panx"><![CDATA[0]]></Property>
+<Property name="pany"><![CDATA[0]]></Property>
+<Property name="cursorMode"><![CDATA[CROSSHAIR]]></Property>
+<Property name="visible"><![CDATA[ThreeD]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar0</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[0])]]></Property>
+<Property name="y"><![CDATA[0]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[0])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[0])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[0])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[red]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar1</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[1])]]></Property>
+<Property name="y"><![CDATA[1*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[1])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[1])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[1])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar2</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[2])]]></Property>
+<Property name="y"><![CDATA[2*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[2])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[2])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[2])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar3</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[3])]]></Property>
+<Property name="y"><![CDATA[3*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[3])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[3])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[3])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar4</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[4])]]></Property>
+<Property name="y"><![CDATA[4*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[4])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[4])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[4])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar5</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[5])]]></Property>
+<Property name="y"><![CDATA[5*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[5])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[5])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[5])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar6</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[6])]]></Property>
+<Property name="y"><![CDATA[6*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[6])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[6])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[6])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar7</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[7])]]></Property>
+<Property name="y"><![CDATA[7*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[7])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[7])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[7])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar8</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[8])]]></Property>
+<Property name="y"><![CDATA[8*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[8])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[8])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[8])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar9</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[9])]]></Property>
+<Property name="y"><![CDATA[9*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[9])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[9])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[9])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar10</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[10])]]></Property>
+<Property name="y"><![CDATA[10*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[10])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[10])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[10])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Bar11</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[-Math.cos(x[11])]]></Property>
+<Property name="y"><![CDATA[11*d]]></Property>
+<Property name="z"><![CDATA[-Math.sin(x[11])]]></Property>
+<Property name="sizex"><![CDATA[2*Math.cos(x[11])]]></Property>
+<Property name="sizey"><![CDATA[0]]></Property>
+<Property name="sizez"><![CDATA[2*Math.sin(x[11])]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+<Property name="color"><![CDATA[blue]]></Property>
+<Property name="stroke"><![CDATA[2]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Arrow</Type>
+<Property name="name">Axis</Property>
+<Property name="parent">DrawingPanel3D</Property>
+<Property name="x"><![CDATA[0]]></Property>
+<Property name="y"><![CDATA[-d]]></Property>
+<Property name="z"><![CDATA[0]]></Property>
+<Property name="sizex"><![CDATA[0]]></Property>
+<Property name="sizey"><![CDATA[(n+1)*d]]></Property>
+<Property name="sizez"><![CDATA[0]]></Property>
+<Property name="enabled"><![CDATA[true]]></Property>
+<Property name="style"><![CDATA[SEGMENT]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Expanded>true</Expanded>
+<Type>Elements.Dialog</Type>
+<Property name="name">Dialog</Property>
+<Property name="title"><![CDATA[Dialog]]></Property>
+<Property name="layout"><![CDATA[border]]></Property>
+<Property name="visible"><![CDATA[true]]></Property>
+<Property name="location"><![CDATA["608,51"]]></Property>
+<Property name="size"><![CDATA["400,300"]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Expanded>false</Expanded>
+<Type>Elements.PlottingPanel</Type>
+<Property name="name">Energy_vs_external_frequency</Property>
+<Property name="parent">Dialog</Property>
+<Property name="position">south</Property>
+<Property name="title"><![CDATA[Energy vs frequency]]></Property>
+<Property name="titleX"><![CDATA[external frequency]]></Property>
+<Property name="titleY"><![CDATA[energy]]></Property>
+<Property name="autoscaleX"><![CDATA[true]]></Property>
+<Property name="autoscaleY"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+<Osejs.View.Creation.Element>
+<Type>Elements.Trace</Type>
+<Property name="name">EnergyVsFrequency</Property>
+<Property name="parent">Energy_vs_external_frequency</Property>
+<Property name="x"><![CDATA[freq]]></Property>
+<Property name="y"><![CDATA[TotalEnergy]]></Property>
+<Property name="skippoints"><![CDATA[10]]></Property>
+<Property name="norepeat"><![CDATA[true]]></Property>
+<Property name="connected"><![CDATA[true]]></Property>
+</Osejs.View.Creation.Element>
+</Osejs.View.Creation>
+</Osejs.View>
+</Osejs>

@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title> Home page for TorsionalOscillator</title>
+  </head>
+  <body bgcolor='#FFFFFF'> 
+<br>
+<applet code="torsionalOscillator.TorsionalOscillatorApplet.class"
+        codebase="." archive="_library/ejsBasic.jar,torsionalOscillator.jar"
+        name="TorsionalOscillator"  id="TorsionalOscillator"
+        width="486" height="325">
+</applet>
+
+<!--- Finally the JavaScript buttons --->
+
+<p>
+<input type="BUTTON" value="Play" onclick="document.TorsionalOscillator._play();";>
+<input type="BUTTON" value="Pause" onclick="document.TorsionalOscillator._pause();";>
+<input type="BUTTON" value="Reset" onclick="document.TorsionalOscillator._reset();";>
+</p><p>
+<br><hr width="100%" size="2"><br>
+</p>
+Created with the aid of <a href=http://www.um.es/fem/Ejs/>Easy Java Simulations</a>.
+  </body>
+</html>
