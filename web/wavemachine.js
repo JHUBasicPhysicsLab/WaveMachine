@@ -194,6 +194,10 @@
   $('drive-on').addEventListener('change', (e) => { driveOn = e.target.checked; });
   $('logy').addEventListener('change', drawPlot);
   $('theory').addEventListener('change', drawPlot);
+  // "How are the predicted resonances calculated?" opens the explanation before jumping to it.
+  function openExplanation() { const d = $('resonances'); if (d) d.open = true; }
+  $('theory-help').addEventListener('click', openExplanation);
+  if (location.hash === '#resonances') openExplanation();
   $('clear-plot').addEventListener('click', () => { clearPlot(); drawPlot(); });
   $('reset').addEventListener('click', () => { resetAll(); drawAll(); });
   $('kick').addEventListener('click', () => { y[0] = 0.6; y[N] = 0; drawAll(); });

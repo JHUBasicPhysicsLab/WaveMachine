@@ -100,3 +100,16 @@ figure { margin: 12px 0; }
 figcaption { color: var(--muted); font-size: 0.85rem; }
 .ack { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 8px; color: var(--muted); font-size: 0.9rem; }
 footer { padding-bottom: 32px; }
+
+/* Resonance explanation */
+details { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 8px; }
+summary { cursor: pointer; }
+summary h2 { display: inline; margin: 0; }
+summary::marker { color: var(--muted); }
+.eq { text-align: center; font-size: 1.05rem; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; margin: 12px 0; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
+caption { text-align: left; color: var(--muted); font-size: 0.85rem; padding-bottom: 4px; }
+th, td { border-bottom: 1px solid var(--line); padding: 4px 12px; text-align: right; }
+th { font-weight: 600; vertical-align: bottom; }
+th:first-child, td:first-child { text-align: center; }
