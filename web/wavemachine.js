@@ -142,7 +142,10 @@
   const machine = $('machine'), plot = $('plot');
   const mctx = machine.getContext('2d'), pctx = plot.getContext('2d');
   let view3d = true;
-  let yaw = -0.6, elev = 0.32; // camera angles (radians)
+  // Camera angles (radians). On a narrow screen, look more along the wire so the machine
+  // fills a taller canvas instead of shrinking to fit its full length side-on.
+  const narrow = machine.clientWidth < 560;
+  let yaw = narrow ? -1.0 : -0.6, elev = narrow ? 0.45 : 0.32;
 
   const sliders = [
     ['freq', 'freq-range', 'freq-num', 3],
@@ -262,9 +265,27 @@
     return [project(-c, Y, -s), project(c, Y, s), project(0, Y, 0)];
   }
 
+  // Scale and center the machine so the space any rod can sweep (a cylinder of radius 1
+  // around the wire) just fits the canvas from the current camera angle.
+  function fitView(w, h) {
+    proj.S = 1; proj.cx = 0; proj.cy = 0;
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (const Y of [-0.4, LEN + 0.4]) {
+      for (let k = 0; k < 24; k++) {
+        const a = (k / 24) * 2 * Math.PI;
+        const q = project(Math.cos(a), Y, Math.sin(a));
+        x0 = Math.min(x0, q.x); x1 = Math.max(x1, q.x);
+        y0 = Math.min(y0, q.y); y1 = Math.max(y1, q.y);
+      }
+    }
+    const pad = 10;
+    proj.S = Math.min((w - 2 * pad) / (x1 - x0), (h - 2 * pad) / (y1 - y0));
+    proj.cx = w / 2 - proj.S * (x0 + x1) / 2;
+    proj.cy = h / 2 - proj.S * (y0 + y1) / 2;
+  }
+
   function draw3D(w, h) {
-    proj.S = Math.min(w / (LEN + 3.2), h / 4.2);
-    proj.cx = w / 2; proj.cy = h / 2;
+    fitView(w, h);
     const ctx = mctx;
     ctx.lineCap = 'round';
 

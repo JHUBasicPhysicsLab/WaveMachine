@@ -59,6 +59,7 @@ h3 { font-size: 1.05rem; margin: 20px 0 6px; }
 .card-head h2 { margin: 0; font-size: 1rem; }
 canvas { display: block; width: 100%; touch-action: none; border-radius: 6px; }
 #machine { aspect-ratio: 2 / 1; cursor: grab; }
+@media (max-width: 600px) { #machine { aspect-ratio: 4 / 3; } }
 #machine.dragging { cursor: grabbing; }
 #plot { aspect-ratio: 4 / 3; cursor: crosshair; }
 .hint { color: var(--muted); font-size: 0.85rem; margin: 6px 0 0; }
