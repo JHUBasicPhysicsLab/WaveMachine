@@ -524,7 +524,7 @@
     ctx.save();
     ctx.translate(12, top + ph / 2); ctx.rotate(-Math.PI / 2);
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('energy', 0, 0);
+    ctx.fillText('energy (J)', 0, 0);
     ctx.restore();
   }
 
@@ -544,7 +544,7 @@
 
   function setPickedText() {
     $('plot-readout').textContent = picked
-      ? `Marked: ω = ${picked.f.toFixed(3)} rad/s, energy = ${picked.e.toPrecision(3)}`
+      ? `Marked: ω = ${picked.f.toFixed(3)} rad/s, energy = ${picked.e.toPrecision(3)} J`
       : 'Click the plot to read off a frequency and energy.';
   }
 
