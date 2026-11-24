@@ -7,4 +7,4 @@ Work log for the Wave Machine Code Update (see `../project-rules.md`).
 
 ## Index
 
-- [2026-11-24](2026-11-24.md): Repo setup; first browser version; physics checks; units; instructor page
+- [2026-11-24](2026-11-24.md): Repo setup; first browser version; physics checks; units; instructor page; published; repo public
