@@ -102,7 +102,7 @@ figcaption { color: var(--muted); font-size: 0.85rem; }
 .ack { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 8px; color: var(--muted); font-size: 0.9rem; }
 footer { padding-bottom: 32px; }
 
-/* Instructor notes: equations and table */
+/* Equations and tables */
 .eq { text-align: center; font-size: 1.05rem; }
 .table-wrap { overflow-x: auto; }
 table { border-collapse: collapse; margin: 12px 0; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
@@ -110,3 +110,8 @@ caption { text-align: left; color: var(--muted); font-size: 0.85rem; padding-bot
 th, td { border-bottom: 1px solid var(--line); padding: 4px 12px; text-align: right; }
 th { font-weight: 600; vertical-align: bottom; }
 th:first-child, td:first-child { text-align: center; }
+
+/* Assignment problems */
+ol.problems { list-style: none; padding-left: 0; }
+ol.problems li { margin: 0 0 12px; }
+.note { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
