@@ -32,6 +32,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
@@ -101,11 +102,7 @@ figcaption { color: var(--muted); font-size: 0.85rem; }
 .ack { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 8px; color: var(--muted); font-size: 0.9rem; }
 footer { padding-bottom: 32px; }
 
-/* Resonance explanation */
-details { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 8px; }
-summary { cursor: pointer; }
-summary h2 { display: inline; margin: 0; }
-summary::marker { color: var(--muted); }
+/* Instructor notes: equations and table */
 .eq { text-align: center; font-size: 1.05rem; }
 .table-wrap { overflow-x: auto; }
 table { border-collapse: collapse; margin: 12px 0; font-variant-numeric: tabular-nums; font-size: 0.95rem; }

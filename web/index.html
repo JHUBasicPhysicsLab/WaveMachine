@@ -95,9 +95,8 @@
       <p class="hint" id="plot-readout">Click the plot to read off a frequency and energy.</p>
       <div class="checks">
         <label><input type="checkbox" id="logy"> Log energy scale</label>
-        <label><input type="checkbox" id="theory"> Show predicted resonances</label>
+        <label hidden id="theory-label"><input type="checkbox" id="theory"> Show predicted resonances</label>
       </div>
-      <p class="hint"><a href="#resonances" id="theory-help">How are the predicted resonances calculated?</a></p>
     </div>
   </section>
 
@@ -163,94 +162,7 @@
       drive. Sweep in both directions: the true resonance lies between the peak positions.</li>
       <li>Clamp the right end with the checkbox, or by clicking the last rod, to compare a free end with
       a fixed one.</li>
-      <li>“Show predicted resonances” marks the normal-mode frequencies of the 12-rod model and shades the
-      forbidden band. Try to measure them yourself before turning it on.</li>
     </ul>
-
-    <details id="resonances">
-      <summary><h2>How the predicted resonances are calculated</h2></summary>
-
-      <p>The dashed lines on the energy plot are the <i>normal-mode frequencies</i> of the 12 rods: the
-      frequencies at which the whole machine can oscillate on its own, with every rod moving at the same
-      frequency. Driving the machine at one of these frequencies builds up a large response, which is a
-      resonance. Since the damping is weak, the resonances sit very close to the normal-mode frequencies.</p>
-
-      <h3>1. Look for a standing wave</h3>
-      <p>Number the rods <i>n</i> = 1 to 12 and try a standing wave of a single frequency ω:</p>
-      <p class="eq">θ<sub><i>n</i></sub>(<i>t</i>) = <i>A</i> cos(<i>q</i>(<i>n</i> − ½)) cos ω<i>t</i></p>
-      <p>Here <i>q</i> is the change in phase from one rod to the next. It plays the role of the
-      wavenumber <i>k</i> in the handout, measured per rod.</p>
-
-      <h3>2. Put it into the equation of motion</h3>
-      <p>Without damping or drive, each rod obeys
-      θ̈<sub><i>n</i></sub> = s²(θ<sub><i>n</i>+1</sub> − 2θ<sub><i>n</i></sub> + θ<sub><i>n</i>−1</sub>) − ω₀²θ<sub><i>n</i></sub>.
-      Using cos(<i>x</i> + <i>q</i>) + cos(<i>x</i> − <i>q</i>) = 2 cos <i>x</i> cos <i>q</i>, every rod gives the
-      same condition:</p>
-      <p class="eq">ω² = ω₀² + 4s² sin²(<i>q</i>/2)</p>
-      <p>This is the <i>dispersion relation</i> of the wave machine. For long waves (small <i>q</i>),
-      4 sin²(<i>q</i>/2) ≈ <i>q</i>², which gives the handout’s ω² = ω₀² + s²<i>k</i>². It also shows
-      why low frequencies are forbidden: the smallest possible ω is ω₀ = 0.5 rad/s, when <i>q</i> = 0.
-      (There is also a highest frequency, √(ω₀² + 4s²) ≈ 2.06 rad/s, when neighboring rods swing
-      opposite ways. That limit comes from the rods being discrete.)</p>
-
-      <h3>3. Make it fit the ends</h3>
-      <p>The boundary conditions decide which values of <i>q</i> are allowed.</p>
-      <ul>
-        <li><b>Free end.</b> Nothing twists the end rod from outside, as if an imaginary extra rod beyond
-        the end always turned exactly with it. At the left end that means θ<sub>0</sub> = θ<sub>1</sub>,
-        which our cosine already satisfies. At the right end it means θ<sub>13</sub> = θ<sub>12</sub>,
-        which requires sin(12<i>q</i>) = 0, so <i>q</i> = π<i>m</i>/12 with <i>m</i> = 0, 1, …, 11.</li>
-        <li><b>Clamped end.</b> Rod 12 cannot move: θ<sub>12</sub> = 0. That requires cos(11.5<i>q</i>) = 0,
-        so <i>q</i> = (2<i>m</i> + 1)π/23 with <i>m</i> = 0, 1, …, 10. Only 11 rods can move, so there
-        are 11 modes.</li>
-      </ul>
-
-      <h3>4. The result</h3>
-      <p>Putting the allowed <i>q</i> values into the dispersion relation gives the frequencies, with
-      s = 1 s⁻¹ and ω₀ = 0.5 rad/s:</p>
-      <ul>
-        <li>Both ends free: ω<sub><i>m</i></sub> = √(ω₀² + 4s² sin²(π<i>m</i>/24))</li>
-        <li>Right end clamped: ω<sub><i>m</i></sub> = √(ω₀² + 4s² sin²((2<i>m</i> + 1)π/46))</li>
-      </ul>
-      <div class="table-wrap">
-      <table>
-        <caption>Normal-mode frequencies (rad/s)</caption>
-        <thead>
-          <tr><th scope="col"><i>m</i></th><th scope="col">Both ends free</th><th scope="col">Free ends, continuum approximation</th><th scope="col">Right end clamped</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>0</td><td>0.500</td><td>0.500</td><td>0.518</td></tr>
-          <tr><td>1</td><td>0.564</td><td>0.564</td><td>0.645</td></tr>
-          <tr><td>2</td><td>0.720</td><td>0.724</td><td>0.836</td></tr>
-          <tr><td>3</td><td>0.914</td><td>0.931</td><td>1.047</td></tr>
-          <tr><td>4</td><td>1.118</td><td>1.160</td><td>1.257</td></tr>
-          <tr><td>5</td><td>1.316</td><td>1.401</td><td>1.454</td></tr>
-          <tr><td>6</td><td>1.500</td><td>1.648</td><td>1.630</td></tr>
-          <tr><td>7</td><td>1.664</td><td>1.900</td><td>1.780</td></tr>
-          <tr><td>8</td><td>1.803</td><td>2.153</td><td>1.901</td></tr>
-          <tr><td>9</td><td>1.914</td><td>2.409</td><td>1.990</td></tr>
-          <tr><td>10</td><td>1.996</td><td>2.665</td><td>2.043</td></tr>
-          <tr><td>11</td><td>2.045</td><td>2.923</td><td>—</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <p>The continuum column uses the handout’s ω² = ω₀² + s²<i>k</i>² with <i>k</i> = π<i>m</i>/<i>L</i>
-      and <i>L</i> = 12. It agrees with the exact values for the first few modes and drifts away for
-      shorter waves, as footnote 1 of the handout warns.</p>
-
-      <h3>Why the measured peaks can differ a little</h3>
-      <ul>
-        <li><b>Sweeping.</b> A resonance takes time to build up, so while the frequency is sweeping, the
-        peak shows up late: too high when sweeping up and too low when sweeping down. Sweep both ways, or
-        slow the sweep down.</li>
-        <li><b>Damping</b> lowers and broadens each peak and moves it very slightly. With the default
-        damping the shift is far smaller than the sweep lag.</li>
-        <li><b>Where the drive is.</b> The drive pushes only rod 1, so modes with little motion at rod 1
-        respond weakly and their peaks can be small.</li>
-      </ul>
-      <p>The shaded region on the plot is the forbidden band, ω &lt; ω₀. Waves at these frequencies die
-      away along the machine instead of travelling through it.</p>
-    </details>
 
     <h2>The handout</h2>
     <p>For the physics of the wave machine and suggested activities, see Oleg Tchernyshyov’s handout,

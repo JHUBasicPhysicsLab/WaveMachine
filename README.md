@@ -6,6 +6,10 @@ apparatus, for the JHU Physics and Astronomy lecture demonstrations.
 The new page (`web/`) is plain HTML and JavaScript with no libraries, build step, or server code.
 Open `web/index.html` in any browser, or copy the `web/` folder to a web server.
 
+**Instructor mode:** `index.html?instructor` adds a "Show predicted resonances" checkbox to the
+energy plot. Students don't see it, since it gives away answers to the handout's Problems 3 and 4.
+It's hidden, not protected.
+
 ## Credits
 
 - **Original simulation and teaching material:** Prof. Oleg Tchernyshyov, Department of Physics and
@@ -24,7 +28,8 @@ Open `web/index.html` in any browser, or copy the `web/` folder to a web server.
 
 | Folder | Contents |
 |--------|----------|
-| `web/` | The new simulation page and its images and handout. |
+| `web/` | The new simulation page (`index.html`) and its images and handout. |
+| `web/instructor.html` | Instructor notes: answers to the handout problems and how the predicted resonances are calculated. Not linked from the student page. |
 | `original/` | Untouched copy of the 2017 Java applet files, including the EJS source `_library/TorsionalOscillator.xml`. |
 | `logs/` | Dated work log of changes and discoveries. |
 | `project-rules.md` | Project goals. |
